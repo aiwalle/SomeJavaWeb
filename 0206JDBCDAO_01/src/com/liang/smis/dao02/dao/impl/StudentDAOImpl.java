@@ -13,6 +13,7 @@ import com.liang.smis.dao02.dao.IStudentDAO;
 import com.liang.smis.dao02.domin.Student;
 import com.liang.smis.dao02.template.IResultSetHandler;
 import com.liang.smis.dao02.template.JdbcTemplate;
+import com.liang.smis.dao02.template.handler.BeanHandler;
 import com.liang.smis.dao02.template.handler.BeanListHandler;
 import com.liang.smis.util.DbcpUtil;
 import com.liang.smis.util.JdbcUtil;
@@ -279,11 +280,15 @@ public class StudentDAOImpl implements IStudentDAO{
 	public Student newGetStudent(Long id) {
 		String sql = "SELECT * FROM t_student WHERE id = ?";
 //		List<Student> list = JdbcTemplate.query(sql, id);
-		IResultSetHandler rHandler = new BeanListHandler<>(Student.class);
+//		IResultSetHandler rHandler = new BeanListHandler<>(Student.class);
 		// 这里需要强制转换，不好
 //		List<Student> list = JdbcTemplate.query(sql, rHandler, id);
-		List<Student> list = JdbcTemplate.query(sql, new BeanListHandler<>(Student.class), id);
-		return list.size() == 1 ? list.get(0) : null;
+//		List<Student> list = JdbcTemplate.query(sql, new BeanListHandler<>(Student.class), id);
+//		return list.size() == 1 ? list.get(0) : null;
+		
+		
+		Student student = JdbcTemplate.query(sql, new BeanHandler<>(Student.class), id);
+		return student;
 	}
 	
 	public List<Student> newList() {

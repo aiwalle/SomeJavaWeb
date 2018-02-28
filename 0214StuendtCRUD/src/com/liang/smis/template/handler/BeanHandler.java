@@ -1,12 +1,12 @@
-package com.liang.smis.dao02.template.handler;
+package com.liang.smis.template.handler;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSet;
-import java.util.Iterator;
+//import java.util.Iterator;
 
-import com.liang.smis.dao02.template.IResultSetHandler;
+import com.liang.smis.template.IResultSetHandler;
 
 public class BeanHandler<T> implements IResultSetHandler<T> {
 	private Class<T> classType;

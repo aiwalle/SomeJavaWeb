@@ -221,6 +221,7 @@ public class StudentDAOTest {
 	public void testNewAllStudent() throws Exception {
 		List<Student> list = dao.newList();
 		System.out.println(list);
+//		System.out.println("这里是重构后获取所有的");
 	}
 	
 	
