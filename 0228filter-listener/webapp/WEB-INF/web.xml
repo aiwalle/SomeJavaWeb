@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="false">
+ 
+ 
+ 
+ 	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>com.liang.encode.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>		
+		</init-param>
+		<!-- 是否强制使用该编码 -->
+		<init-param>
+			<param-name>force</param-name>
+			<param-value>false</param-value>		
+		</init-param>
+		
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 	<!-- 单个Filter针对不同的情况的处理 -->
+	 <!-- <filter>
+		<filter-name>FilterDemo1</filter-name>
+		<filter-class>com.liang.hello.FilterDemo1</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterDemo1</filter-name>
+		<url-pattern>/*</url-pattern>
+		只对请求做拦截，默认情况
+		<dispatcher>REQUEST</dispatcher>
+		
+		对请求转发做拦截
+		<dispatcher>FORWARD</dispatcher>
+		跳转到错误页面做拦截
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page> -->
+	
+	
+	
+	
+	
+	<!-- 多个Filter -->
+	
+	<!-- <filter>
+		<filter-name>FilterDemo2</filter-name>
+		<filter-class>com.liang.hello.FilterDemo2</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterDemo2</filter-name>
+		<url-pattern>/hello.jsp</url-pattern>
+		<url-pattern>/index.html</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>FilterDemo3</filter-name>
+		<filter-class>com.liang.hello.FilterDemo3</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FilterDemo3</filter-name>
+		<url-pattern>/hello.jsp</url-pattern>
+		<url-pattern>/index.html</url-pattern>
+	</filter-mapping> -->
+</web-app>

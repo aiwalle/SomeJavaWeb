@@ -19,7 +19,7 @@ public class TransformServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 	
 		// 这里是防止表单重复提交的主要代码
-		// 生成token的代码在jsp中
+		// 生成token的代码在jsp中，后面封装到了InputServlet中
 		String tokenInRequest = req.getParameter("token");
 		String tokenInSession = (String) req.getSession().getAttribute("TOKEN_IN_SESSION");
 		
@@ -32,6 +32,7 @@ public class TransformServlet extends HttpServlet {
 			System.out.println("转出"+money);
 			out.println("转账成功");
 		} else {
+			// 临时token使用过一次后的执行代码，token失效后执行的代码
 			System.out.println("提交失败");
 		}
 		
