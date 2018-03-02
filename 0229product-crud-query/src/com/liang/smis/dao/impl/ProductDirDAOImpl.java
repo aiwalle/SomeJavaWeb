@@ -25,7 +25,7 @@ public class ProductDirDAOImpl implements IProductDirDAO {
 
 	public void update(ProductDir obj) {
 		String sql = "UPDATE productdir SET dirname=?, parentid=? WHERE id = ?";
-		System.out.println("==========================================");
+//		System.out.println("==========================================");
 		JdbcTemplate.update(sql, obj.getDirName(), obj.getParentid(), obj.getId());
 	}
 
@@ -50,7 +50,7 @@ public class ProductDirDAOImpl implements IProductDirDAO {
 
 	
 	class ProductDirResultSetHandler implements IResultSetHandler<List<ProductDir>> {
-		public List<ProductDir> handler(ResultSet resultSet) throws SQLException {
+		public List<ProductDir> handler(ResultSet resultSet) throws Exception {
 			List<ProductDir> list = new ArrayList<>();
 			while (resultSet.next()) {
 				ProductDir dir = new ProductDir();

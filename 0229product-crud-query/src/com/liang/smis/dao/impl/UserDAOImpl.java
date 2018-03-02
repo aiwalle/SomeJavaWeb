@@ -14,7 +14,7 @@ public class UserDAOImpl implements IUserDAO {
 		
 		String sql = "SELECT * FROM t_user WHERE username = ?";
 		return JdbcTemplate.query(sql, new IResultSetHandler<User>() {
-			public User handler(ResultSet resultSet) throws SQLException {
+			public User handler(ResultSet resultSet) throws Exception {
 				if (resultSet.next()) {
 					User user = new User();
 					user.setId(resultSet.getLong("id"));

@@ -19,10 +19,9 @@ import com.liang.smis.dao.impl.ProductDirDAOImpl;
 import com.liang.smis.domin.Product;
 import com.liang.smis.page.PageResult;
 import com.liang.smis.query.ProductQueryObject;
-import com.liang.smis.query.QueryObject;
 
-@WebServlet("/product")
-public class ProductServlet extends HttpServlet {
+@WebServlet("/page")
+public class PageServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	// 商品dao
@@ -67,26 +66,33 @@ public class ProductServlet extends HttpServlet {
 	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//1.接受
 		//2.调用
-		// 这种方式不再使用
-//		List<Product> list = dao.list();
+		// 当前页
+		String currentPageStr = req.getParameter("currentPage");
+		Integer currentpage = 1;
+		if (StringUtils.isNotBlank(currentPageStr)) {
+			currentpage = Integer.valueOf(currentPageStr);
+		}
 		
-		// 
+		// 每页显示的条数
+		String pageSizeStr = req.getParameter("pageSize");
+		Integer pageSize = 5;
+		if (StringUtils.isNotBlank(pageSizeStr)) {
+//			System.out.println(pageSizeStr);
+			pageSize = Integer.valueOf(pageSizeStr);
+		}
+		 
+		
+		
 		ProductQueryObject queryObject = getProductQueryObject(req);
-//		List<Product> list = dao.query(queryObject);
-		PageResult result = dao.queryMore(queryObject);
+		PageResult result = dao.query(currentpage, pageSize);
 		
 		//3.跳转
 		// 商品分类
 		req.setAttribute("productdir", dirDao.list());
 		// 商品列表
-//		req.setAttribute("products", list);
+		
 		req.setAttribute("pageResult", result);
 		
-		 for (int i = 0; i < result.getListData().size(); i++) {
-			System.out.println(result.getListData().get(i));
-		 }
-		
-		 System.out.println("total=" + result.getTotalCount());
 		// 查询信息
 		req.setAttribute("qo", queryObject);
 		req.getRequestDispatcher("/WEB-INF/views/product/list.jsp").forward(req, resp);
@@ -98,7 +104,8 @@ public class ProductServlet extends HttpServlet {
 		if (hasLength(id)) {
 			dao.delete(Long.valueOf(id));
 		}
-		resp.sendRedirect("/product");
+//		resp.sendRedirect("/product");
+		resp.sendRedirect("/page");
 	}
 
 	//编辑指定商品 
@@ -125,7 +132,8 @@ public class ProductServlet extends HttpServlet {
 			System.out.println("save");
 		}
 		//statuscode 302 这里跳转到首页的时候响应为302，不知道原因
-		resp.sendRedirect("/product");
+//		resp.sendRedirect("/product");
+		resp.sendRedirect("/page");
 	}
 
 
@@ -141,6 +149,8 @@ public class ProductServlet extends HttpServlet {
 		String salePrice = req.getParameter("salePrice");
 //		System.out.println(salePrice);
 		String cutoff = req.getParameter("cutoff");
+		
+		
 		
 		if (hasLength(id)) {
 			product.setId(Long.valueOf(id));
@@ -168,19 +178,6 @@ public class ProductServlet extends HttpServlet {
 		String maxPrice = request.getParameter("maxPrice");
 		String dirId = request.getParameter("dirId");
 		String keyword = request.getParameter("keyword");
-		
-		
-
-		String currentPageStr = request.getParameter("currentPage");
-		if (StringUtils.isNotBlank(currentPageStr)) {
-			queryObject.setCurrentPage(Integer.valueOf(currentPageStr));
-		}
-		
-		// 每页显示的条数
-		String pageSizeStr = request.getParameter("pageSize");
-		if (StringUtils.isNotBlank(pageSizeStr)) {
-			queryObject.setPageSize(Integer.valueOf(pageSizeStr));
-		}
 		
 		if (StringUtils.isNotBlank(keyword)) {
 			queryObject.setKeyword(keyword);

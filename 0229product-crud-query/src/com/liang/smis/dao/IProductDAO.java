@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.liang.smis.domin.Product;
+import com.liang.smis.page.PageResult;
 import com.liang.smis.query.ProductQueryObject;
+import com.liang.smis.query.QueryObject;
 
 public interface IProductDAO {
 	void sava(Product obj);
@@ -36,5 +38,11 @@ public interface IProductDAO {
 	 * @return
 	 */
 	List<Product> query(ProductQueryObject obj);
+	
+	
+	PageResult query(Integer currentPage, Integer pageSize);
+	
+	// 高级查询+分页
+	PageResult queryMore(QueryObject obj);
 	
 }

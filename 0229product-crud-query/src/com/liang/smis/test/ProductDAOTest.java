@@ -66,17 +66,13 @@ public class ProductDAOTest {
 		queryObject.setMaxSalePrice(new BigDecimal("500"));
 		List<Product> list = dao.query(queryObject);
 				
-		
-		
-		
-		
-		
-		
 		System.out.println("size" + list.size());
 		for (Product product : list) {
 			System.out.println(product);
 		}
 	}
+	
+	
 		
 		
 

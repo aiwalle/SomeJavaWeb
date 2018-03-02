@@ -20,6 +20,8 @@ public class ProductQueryObject extends QueryObject {
 	private Long dir_id = -1L;
 	private String keyword;
 	
+//	private Integer currentPage;
+//	private Integer pageSize;
 	
 	public void customizedQuery() {
 		// 商品名称

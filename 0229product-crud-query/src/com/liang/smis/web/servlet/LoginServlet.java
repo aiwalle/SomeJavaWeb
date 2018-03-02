@@ -46,6 +46,8 @@ public class LoginServlet extends HttpServlet {
 		// 登录成功跳转商品列表
 		req.getSession().setAttribute("USER_IN_SESSION", user);
 		resp.sendRedirect("/product");
+//		resp.sendRedirect("/page");
+		
 		
 	}
 

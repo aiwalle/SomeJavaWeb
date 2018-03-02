@@ -13,9 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.liang.smis.dao.IProductDAO;
 import com.liang.smis.domin.Product;
+import com.liang.smis.page.PageResult;
 import com.liang.smis.query.ProductQueryObject;
+import com.liang.smis.query.QueryObject;
 import com.liang.smis.template.IResultSetHandler;
 import com.liang.smis.template.JdbcTemplate;
+import com.liang.smis.template.handler.BeanListHandler;
 import com.liang.smis.util.JdbcUtil;
 
 public class ProductDAOImpl implements IProductDAO {
@@ -52,7 +55,7 @@ public class ProductDAOImpl implements IProductDAO {
 	}
 	
 	class ProductResultSetHandler implements IResultSetHandler<List<Product>> {
-		public List<Product> handler(ResultSet resultSet) throws SQLException {
+		public List<Product> handler(ResultSet resultSet) throws Exception {
 			List<Product> list = new ArrayList<>();
 			while (resultSet.next()) {
 				Product product = new Product();
@@ -128,6 +131,64 @@ public class ProductDAOImpl implements IProductDAO {
 		System.out.println("查询参数  " + obj.getParameters());
 		// ⚠️这里需要的是一个object数组，而不是一个List，因此需要通过toArray进行转换
 		return JdbcTemplate.query(sql, new ProductResultSetHandler(), obj.getParameters().toArray());
+	}
+
+	//===============================分页的新的查询方法==============================
+	
+	public PageResult query(Integer currentPage, Integer pageSize) {
+		String countSql = "SELECT COUNT(*) FROM product";
+		Integer totalCount = JdbcTemplate.query(countSql, new IResultSetHandler<Long>() {
+			public Long handler(ResultSet resultSet) throws Exception {
+				if (resultSet.next()) {
+					return resultSet.getLong(1);
+				}
+				return 0L;
+			}
+		}).intValue();
+		
+		String resultSql = "SELECT * FROM product LIMIT ?,?";
+		
+		Object[] params = {(currentPage-1) * pageSize, pageSize};
+		System.out.println(currentPage);
+		System.out.println(pageSize);
+		List<Product> list = JdbcTemplate.query(resultSql, new BeanListHandler<>(Product.class), params);
+		
+		return new PageResult(list, totalCount, currentPage, pageSize);
+	}
+
+	
+	
+	// 高级查询+分页
+	public PageResult queryMore(QueryObject obj) {
+		String countSql = "SELECT COUNT(*) FROM product " + obj.getQuery();
+		Integer totalCount = JdbcTemplate.query(countSql, new IResultSetHandler<Long>() {
+			public Long handler(ResultSet resultSet) throws Exception {
+				if (resultSet.next()) {
+					return resultSet.getLong(1);
+				}
+				return 0L;
+			}
+		}, obj.getParameters().toArray()).intValue();
+		System.out.println("countSQl:" + countSql);
+		System.out.println("parm111:" + obj.getParameters());
+		
+		
+		String resultSql = "SELECT * FROM product " + obj.getQuery() + " LIMIT ?,?";
+		obj.getParameters().add((obj.getCurrentPage()-1) * obj.getPageSize());
+		obj.getParameters().add(obj.getPageSize());
+		System.out.println("resultSql:" + resultSql);
+		System.out.println("parm222:" + obj.getParameters());
+		
+		List<Product> list = JdbcTemplate.query(resultSql, new BeanListHandler<>(Product.class), obj.getParameters().toArray());
+		
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println("==========================================1");
+//			System.out.println("hello:" + list.get(i));
+//			System.out.println("==========================================2");
+//		}
+//		System.out.println("tttt:" + totalCount);
+		return new PageResult(list, totalCount, obj.getCurrentPage(), obj.getPageSize());
+		
 	}
 	
 

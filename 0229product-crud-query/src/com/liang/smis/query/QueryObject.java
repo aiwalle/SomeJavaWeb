@@ -6,11 +6,18 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class QueryObject {
 	//封装占位符参数
 	private List<Object> parameters = new ArrayList<>();
 		
 	private List<String> conditions = new ArrayList<>();
+	@Getter@Setter
+	private Integer currentPage =1;
+	@Getter@Setter
+	private Integer pageSize =5;
 	
 	// 是否已经构建过SQL了，如果构建过就为true
 	private Boolean isBuild = false;
@@ -33,7 +40,7 @@ public class QueryObject {
 		
 		//==========================工具拼接===================================
 		String queryStr = StringUtils.join(conditions	, " AND ");
-		System.out.println(sql);
+//		System.out.println(sql);
 		return sql.append(" WHERE ").append(queryStr).toString();
 	}
 	
