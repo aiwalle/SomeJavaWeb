@@ -1,6 +1,7 @@
 package com.liang.crm.service;
 
 import com.liang.crm.domain.Employee;
+import com.liang.crm.domain.Role;
 import com.liang.crm.page.PageResult;
 import com.liang.crm.query.QueryObject;
 
@@ -25,4 +26,7 @@ public interface IEmployeeService {
     PageResult queryByCondition(QueryObject qo);
 
     Employee queryByLogin(String username, String password);
+
+
+
 }

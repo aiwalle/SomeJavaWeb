@@ -19,4 +19,8 @@ public interface PermissionMapper {
     Long queryByConditionCount(QueryObject qo);
 
     List<Permission> queryByCondition(QueryObject qo);
+
+    List<Permission> queryByRid(Long rid);
+
+
 }

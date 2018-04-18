@@ -117,42 +117,6 @@ $(function() {
 			var rowData = employeeDatagrid.datagrid("getSelected");
 			// console.log(rowData+"===");
 
-			// if (rowData) {
-			// 	// 打开编辑对话框
-			// 	employeeDialog.dialog("open");
-			// 	// 打开编辑对话框
-			// 	employeeDialog.dialog("setTitle", "编辑");
-			// 	// 清除表单的缓存数据
-			// 	employeeDialogForm.form("clear");
-			// 	// $("#employee_role_combobox").combobox("clear");
-			// 	console.log("123456");
-			// 	// 回显部门信息
-			// 	if (rowData.dept) {
-			// 		rowData["dept.id"] = rowData.dept.id;
-			// 	}
-			// 	/*
-			// 	 * 回显角色列表数据
-			// 	 * 根据员工的Id,发送ajax的请求去后台查询该Id的员工对应的权限,这里要求必须是同步的,不然取到数据为null
-			// 	 * async:false:关闭异步($.get()和$.post()方式都为异步方式) 同步和异步的区别:
-			// 	 * 同步:只有发送请求并响应完毕后,才会执行下面的代码,
-			// 	 * 异步:发送请求后不必等响应就继续执行后面的代码,所以后面取到的响应数据为null
-			// 	 */
-			// 	var html = $.ajax({
-			// 		url : "/employee_queryRoleIdByEid",
-			// 		data : "eid=" + rowData.id,
-			// 		async : false
-			// 	}).responseText;
-			// 	// html为字符串数组,这里要求要用数组对象,所以要用转换为json对象
-			// 	html = $.parseJSON(html);
-			// 	$("#employee_role_combobox").combobox("setValues", html);
-            //
-			// 	// 回显表单的数据
-			// 	employeeDialogForm.form("load", rowData);
-            //
-			// } else {
-			// 	$.messager.alert("温馨提示", "请选中要编辑数据", "info");
-			// }
-
 			if (rowData) {
 				// 打开编辑对话框
 				employeeDialog.dialog("open");
@@ -160,12 +124,48 @@ $(function() {
 				employeeDialog.dialog("setTitle", "编辑");
 				// 清除表单的缓存数据
 				employeeDialogForm.form("clear");
+				// $("#employee_role_combobox").combobox("clear");
+				console.log("123456");
+				// 回显部门信息
 				if (rowData.dept) {
 					rowData["dept.id"] = rowData.dept.id;
 				}
+				/*
+				 * 回显角色列表数据
+				 * 根据员工的Id,发送ajax的请求去后台查询该Id的员工对应的权限,这里要求必须是同步的,不然取到数据为null
+				 * async:false:关闭异步($.get()和$.post()方式都为异步方式) 同步和异步的区别:
+				 * 同步:只有发送请求并响应完毕后,才会执行下面的代码,
+				 * 异步:发送请求后不必等响应就继续执行后面的代码,所以后面取到的响应数据为null
+				 */
+				var html = $.ajax({
+					url : "/role_queryRoleIdByEid",
+					data : "eid=" + rowData.id,
+					async : false
+				}).responseText;
+				// html为字符串数组,这里要求要用数组对象,所以要用转换为json对象
+				html = $.parseJSON(html);
+				$("#employee_role_combobox").combobox("setValues", html);
+
 				// 回显表单的数据
 				employeeDialogForm.form("load", rowData);
+
+			} else {
+				$.messager.alert("温馨提示", "请选中要编辑数据", "info");
 			}
+
+			// if (rowData) {
+			// 	// 打开编辑对话框
+			// 	employeeDialog.dialog("open");
+			// 	// 打开编辑对话框
+			// 	employeeDialog.dialog("setTitle", "编辑");
+			// 	// 清除表单的缓存数据
+			// 	employeeDialogForm.form("clear");
+			// 	if (rowData.dept) {
+			// 		rowData["dept.id"] = rowData.dept.id;
+			// 	}
+			// 	// 回显表单的数据
+			// 	employeeDialogForm.form("load", rowData);
+			// }
 		},
 
 		del : function() {

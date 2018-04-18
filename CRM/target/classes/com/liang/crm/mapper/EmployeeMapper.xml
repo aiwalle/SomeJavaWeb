@@ -95,4 +95,12 @@
     update employee set state=0 where id = #{id}
   </update>
 
+  <insert id="handlerRelation">
+    insert into emp_role(e_id, r_id) values(#{eid}, #{rid})
+  </insert>
+
+  <delete id="deleteRolesByEid">
+    delete from emp_role where e_id = #{eid}
+  </delete>
+
 </mapper>

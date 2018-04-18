@@ -1,6 +1,8 @@
 package com.liang.crm.service.impl;
 
 import com.liang.crm.domain.Employee;
+import com.liang.crm.domain.Permission;
+import com.liang.crm.domain.Role;
 import com.liang.crm.mapper.EmployeeMapper;
 import com.liang.crm.page.PageResult;
 import com.liang.crm.query.QueryObject;
@@ -20,11 +22,30 @@ public class EmployeeServiceImpl implements IEmployeeService {
     private EmployeeMapper dao;
 
     public int save(Employee emp) {
-        return dao.insert(emp);
+        int effectCount = dao.insert(emp);
+        //处理中间表关系
+        List<Role> roles = emp.getRoles();
+        if (roles != null) {
+            for (Role role : roles) {
+                dao.handlerRelation(emp.getId(), role.getId());
+            }
+        }
+        return effectCount;
     }
 
     public int update(Employee emp) {
-        return dao.updateByPrimaryKey(emp);
+        int effectCount = dao.updateByPrimaryKey(emp);
+        // 处理中间表关系
+        // 先删除
+        dao.deleteRolesByEid(emp.getId());
+        // 后新增
+        List<Role> roles = emp.getRoles();
+        if (roles != null) {
+            for (Role role : roles) {
+                dao.handlerRelation(emp.getId(), role.getId());
+            }
+        }
+        return effectCount;
     }
 
     public int delete(Long id) {
@@ -56,4 +77,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Employee queryByLogin(String username, String password) {
         return dao.queryByLogin(username, password);
     }
+
+
 }

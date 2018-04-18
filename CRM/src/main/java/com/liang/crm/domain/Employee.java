@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
+import java.util.List;
 
 @Alias("Employee")
 @Setter@Getter
@@ -29,4 +30,6 @@ public class Employee {
     private Boolean admin;
 
     private Department dept;
+
+    private List<Role> roles;
 }

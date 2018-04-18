@@ -24,4 +24,8 @@ public interface EmployeeMapper {
     List<Employee> queryByCondition(QueryObject qo);
 
     Employee queryByLogin(@Param("username") String username, @Param("password") String password);
+
+    int handlerRelation(@Param("eid") Long eid, @Param("rid") Long rid);
+
+    int deleteRolesByEid(Long eid);
 }

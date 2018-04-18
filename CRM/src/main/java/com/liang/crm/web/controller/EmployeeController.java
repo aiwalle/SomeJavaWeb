@@ -1,6 +1,7 @@
 package com.liang.crm.web.controller;
 
 import com.liang.crm.domain.Employee;
+import com.liang.crm.domain.Role;
 import com.liang.crm.page.AjaxResult;
 import com.liang.crm.page.PageResult;
 import com.liang.crm.query.EmployeeQueryObject;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by liang on 2018/4/14.
@@ -117,6 +118,5 @@ public class EmployeeController {
     }
 
 
-//    @RequestMapping("/employee_queryRoleIdByEid")
-//    @ResponseBody
+
 }

@@ -41,4 +41,10 @@
   </if>
   </select>
 
+  <select id="queryByRid" resultMap="BaseResultMap">
+    select id,name from permission where id in (select p_id from role_permission where r_id = #{rid})
+  </select>
+
+
+
 </mapper>

@@ -20,6 +20,11 @@ public class PermissionController {
     @ResponseBody
     public PageResult list(PermissionQueryObject qo) {
         return permissionService.selectByCondition(qo);
-//        return null;
+    }
+
+    @RequestMapping("/permission_queryByRid")
+    @ResponseBody
+    public PageResult queryByRid(Long rid) {
+        return permissionService.queryByRid(rid);
     }
 }
