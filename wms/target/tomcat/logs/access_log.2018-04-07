@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /images/login/btn_hover.jpg HTTP/1.1" 200 2046 http-bio-8080-exec-4 328
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /images/login/btn.jpg HTTP/1.1" 200 919 http-bio-8080-exec-3 327
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /images/login/login.png HTTP/1.1" 200 142489 http-bio-8080-exec-6 329
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /js/system/login.js HTTP/1.1" 200 297 http-bio-8080-exec-2 327
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /style/login_css.css HTTP/1.1" 200 1752 http-bio-8080-exec-5 327
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:00 +0800] "GET /js/jquery/jquery.js HTTP/1.1" 200 248260 http-bio-8080-exec-10 6
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:01 +0800] "GET / HTTP/1.1" 302 - http-bio-8080-exec-1 1103
+0:0:0:0:0:0:0:1 - - [07/Apr/2018:13:25:01 +0800] "GET /login.jsp HTTP/1.1" 200 1148 http-bio-8080-exec-1 389

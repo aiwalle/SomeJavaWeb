@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 6.配置Action -->
+	<bean id="employeeAction" class="ssh.web.action.EmployeeAction" scope="prototype">
+		<property name="employeeService" ref="employeeService"/>
+		<property name="departmentService" ref="departmentService"/>
+		<property name="roleService" ref="roleService"/>
+	</bean>
+
+	<bean id="departmentAction" class="ssh.web.action.DepartmentAction" scope="prototype">
+		<property name="departmentService" ref="departmentService"/>
+	</bean>
+
+	<bean id="permissionAction" class="ssh.web.action.PermissionAction" scope="prototype">
+		<property name="permissionService" ref="permissionService"/>
+	</bean>
+
+	<bean id="roleAction" class="ssh.web.action.RoleAction" scope="prototype">
+		<property name="roleService" ref="roleService"/>
+		<property name="permissionService" ref="permissionService"/>
+	</bean>
+
+	<bean id="loginAction" class="ssh.web.action.LoginAction" scope="prototype">
+		<property name="employeeService" ref="employeeService"/>
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

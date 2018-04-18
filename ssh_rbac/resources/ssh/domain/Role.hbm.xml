@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ssh.domain">
+	<class name="Role" table="role">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name"/>
+		<property name="sn"/>
+		<!--一个角色拥有多个权限，一个权限可以赋给多个角色 -->
+		<bag name="permissions" table="role_permissions">
+			<key column="role_id" />
+			<many-to-many class="Permission" column="permission_id"/>
+		</bag>
+	</class>
+</hibernate-mapping>

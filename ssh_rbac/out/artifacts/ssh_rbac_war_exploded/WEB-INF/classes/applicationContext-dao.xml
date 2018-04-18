@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!--bean元素的继承：bean元素配置的拷贝-->
+	<bean id="baseDAO" abstract="true">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+
+	<!-- 3.配置DAO -->
+	<bean id="employeeDAO" class="ssh.dao.impl.EmployeeDAOImpl" parent="baseDAO"/>
+	<bean id="departmentDAO" class="ssh.dao.impl.DepartmentDAOImpl" parent="baseDAO"/>
+	<bean id="permissionDAO" class="ssh.dao.impl.PermissionDAOImpl" parent="baseDAO"/>
+	<bean id="roleDAO" class="ssh.dao.impl.RoleDAOImpl" parent="baseDAO"/>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
