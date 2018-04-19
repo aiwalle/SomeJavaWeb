@@ -19,7 +19,7 @@
                 data: $("form").serialize(),
                 success: function(data){
                    if(data.success){
-                        window.location.href="/index";
+//                        window.location.href="/index";
                    }else{
 //                       $.messager.alert("温馨提示",data.msg,"warning");
                        alert("温馨提示",data.msg,"warning");

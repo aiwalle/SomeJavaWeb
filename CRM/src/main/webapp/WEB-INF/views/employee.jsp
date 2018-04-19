@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@taglib prefix="myFn" uri="http://520it.com/java/crm" %>--%>
+
+<%@taglib prefix="myFn" uri="http://www.liang.com/java/crm" %>
 <html>
 <head>
     <title>员工管理</title>
@@ -11,24 +12,16 @@
 <table id="employee_datagrid"></table>
 <div id="employee_datagrid_btn">
     <div>
-        <%--<c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController:save')}">--%>
-            <%--<a class="easyui-linkbutton"   iconCls="icon-add" plain="true" data-cmd="add">新增</a>--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController.edit')}">--%>
-            <%--<a class="easyui-linkbutton" iconCls="icon-edit" plain="true" data-cmd="edit">编辑</a>--%>
-            <%--</c:if>--%>
-            <%--<c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController.delete')}">--%>
-            <%--<a class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-cmd="del">离职</a>--%>
-            <%--</c:if>  --%>
-            <%--<a class="easyui-linkbutton" iconCls="icon-reload" plain="true" data-cmd="refresh">刷新</a>--%>
-
-
-            <a class="easyui-linkbutton" iconCls="icon-add" plain="true" data-cmd="add">新增</a>
+        <c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController:save')}">
+            <a class="easyui-linkbutton"   iconCls="icon-add" plain="true" data-cmd="add">新增</a>
+            </c:if>
+            <c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController.edit')}">
             <a class="easyui-linkbutton" iconCls="icon-edit" plain="true" data-cmd="edit">编辑</a>
+            </c:if>
+            <c:if test="${myFn:checkPermission('com.liang.crm.web.controller.EmployeeController.delete')}">
             <a class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-cmd="del">离职</a>
+            </c:if>
             <a class="easyui-linkbutton" iconCls="icon-reload" plain="true" data-cmd="refresh">刷新</a>
-
-
     </div>
     <div>
         <form id="employee_searchForm">

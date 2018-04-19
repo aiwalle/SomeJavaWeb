@@ -35,4 +35,12 @@ public class PermissionServiceImpl implements IPermissionService {
         List<Permission> result = dao.queryByRid(rid);
         return new PageResult(Long.parseLong(result.size()+""), result);
     }
+
+    public Permission queryByResource(String function) {
+        return dao.queryByResource(function);
+    }
+
+    public List<Permission> queryPermissionByEid(Long id) {
+        return dao.queryPermissionByEid(id);
+    }
 }

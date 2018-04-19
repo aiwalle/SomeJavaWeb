@@ -1,7 +1,7 @@
 $(function () {
     $("#menuTree").tree({
-        url: '/js/data/tree.json ',
-
+        // url: '/js/data/tree.json ',
+        url: '/menu ',
         onClick: function (node) {
             // console.log(node.attributes);
             // 把数据库中attributes:{"url":"xxxxx"}请求的json字符串转换为json对象

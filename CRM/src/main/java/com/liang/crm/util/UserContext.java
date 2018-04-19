@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 public class UserContext {
     public static final String USER_IN_SESSION = "user_in_session";
 
+    public static final String PERMISSION_IN_SESSION = "permission_in_session";
+
+    public static final String MENU_IN_SESSION = "menu_in_session";
+
     private static ThreadLocal<HttpServletRequest> local = new ThreadLocal<HttpServletRequest>();
 
     public static void set(HttpServletRequest request) {

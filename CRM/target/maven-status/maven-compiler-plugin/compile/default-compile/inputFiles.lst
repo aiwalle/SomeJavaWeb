@@ -7,6 +7,7 @@
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/service/ISystemLogService.java
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/web/controller/RoleController.java
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/mapper/DepartmentMapper.java
+/Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/util/PermissionUtils.java
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/domain/Role.java
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/mapper/EmployeeMapper.java
 /Users/liang/Documents/Project/JavaForProject/CRM/src/main/java/com/liang/crm/query/EmployeeQueryObject.java

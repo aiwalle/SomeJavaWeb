@@ -23,4 +23,7 @@ public interface PermissionMapper {
     List<Permission> queryByRid(Long rid);
 
 
+    Permission queryByResource(String function);
+
+    List<Permission> queryPermissionByEid(Long id);
 }

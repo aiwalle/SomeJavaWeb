@@ -1,11 +1,16 @@
 package com.liang.crm.web.controller;
 
 import com.liang.crm.domain.Employee;
+import com.liang.crm.domain.Menu;
+import com.liang.crm.domain.Permission;
 import com.liang.crm.domain.Role;
 import com.liang.crm.page.AjaxResult;
 import com.liang.crm.page.PageResult;
 import com.liang.crm.query.EmployeeQueryObject;
 import com.liang.crm.service.IEmployeeService;
+import com.liang.crm.service.IMenuService;
+import com.liang.crm.service.IPermissionService;
+import com.liang.crm.util.PermissionUtils;
 import com.liang.crm.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
+// day03 5以后的代码没写，导入导出excel的
+
 /**
  * Created by liang on 2018/4/14.
  */
@@ -24,6 +31,12 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private IEmployeeService employeeService;
+
+    @Autowired
+    private IPermissionService permissionService;
+
+    @Autowired
+    private IMenuService menuService;
 
     // 所有的方法都会先经过这个方法，这个方法在mybatis中用不到
     @ModelAttribute
@@ -44,6 +57,13 @@ public class EmployeeController {
         AjaxResult result = null;
         if (user != null) {
             request.getSession().setAttribute(UserContext.USER_IN_SESSION,user);
+            // 查询用户的所有权限
+            List<Permission> userPermission = permissionService.queryPermissionByEid(user.getId());
+            request.getSession().setAttribute(UserContext.PERMISSION_IN_SESSION, userPermission);
+            // 查询所有的Menu节点,判断用户是否有这样的节点
+            List<Menu> menus = menuService.queryMenu();
+            PermissionUtils.getMenuForPermission(menus);
+            request.getSession().setAttribute(UserContext.MENU_IN_SESSION, menus);
             result = new AjaxResult(true, "登录成功");
         } else {
             result = new AjaxResult("账号密码有误");

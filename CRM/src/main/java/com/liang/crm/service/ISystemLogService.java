@@ -7,4 +7,5 @@ import com.liang.crm.domain.SystemLog;
  */
 public interface ISystemLogService {
     int save(SystemLog log);
+
 }
